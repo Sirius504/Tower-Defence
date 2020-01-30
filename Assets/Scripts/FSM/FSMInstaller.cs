@@ -84,7 +84,7 @@ namespace FiniteStateMachine
             public PlayState.Dependencies playStateDependencies;
             public GameOverState.Dependencies gameOverStateDependencies;
             public int mainMenuSceneIndex;
-            internal int gameSceneIndex;
+            public int gameSceneIndex;
         }
     }
 }
