@@ -11,5 +11,6 @@ public class EnemySettings : ScriptableObjectInstaller
         Container.BindInstance(settings);
         Container.BindInstance(settings.movementSettings);
         Container.BindInstance(settings.lifeSettings);
+        Container.BindInstance(settings.damagerSettings);
     }
 }

@@ -9,5 +9,6 @@ public class TowerSettings : ScriptableObjectInstaller
     {
         Container.BindInstance(towerSettings);
         Container.BindInstance(towerSettings.targeterSettings);
+        Container.BindInstance(towerSettings.damagerSettings);
     }
 }

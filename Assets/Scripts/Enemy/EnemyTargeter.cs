@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-public class EnemyTargeter : Targeter<Castle>
+public class EnemyTargeter : Targeter<ILiving>
 {
     private MovementAlongPath pathMovement;
     private Castle castle;

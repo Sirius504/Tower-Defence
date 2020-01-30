@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 public class Tower : MonoBehaviour
@@ -10,24 +8,23 @@ public class Tower : MonoBehaviour
     private Settings settings;
     private ShellRenderer shellRenderer;
     private Targeter<Enemy> targeter;
+    private Damager damager;
 
-    public event Action<Vector3> OnShot;
 
     [Inject]
-    public void Construct(Settings settings, ShellRenderer shellRenderer, TowerTargeter targeter)
+    public void Construct(Settings settings, ShellRenderer shellRenderer, TowerTargeter targeter, Damager damager)
     {        
         this.settings = settings;
         this.shellRenderer = shellRenderer;
         this.targeter = targeter;
-        targeter.OnTargetAcquired += ShootAt;
+        this.damager = damager;
+        targeter.OnTargetAcquired += AttackEnemy;
         lastShotTime = Time.time;
     }
 
-    private void ShootAt(Enemy target)
-    {        
-        var toTarget = target.transform.position - transform.position;
-        target.TakeDamage(settings.damage);
-        OnShot?.Invoke(target.transform.position);
+    private void AttackEnemy(Enemy target)
+    {
+        damager.DoDamage(target);
         shellRenderer.DrawShotAt(target.transform.position, target.GetSpeed());
     }
 
@@ -35,6 +32,6 @@ public class Tower : MonoBehaviour
     public class Settings
     {
         public TowerTargeter.Settings targeterSettings;
-        public float damage = 1f;
+        public Damager.Settings damagerSettings;
     }
 }

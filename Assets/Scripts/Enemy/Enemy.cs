@@ -2,44 +2,40 @@
 using UnityEngine;
 using Zenject;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, ILiving
 {
-    private EnemyTargeter targeter;
-    private Life life;
-    private Settings settings;
+    public Life Life { get; private set; }
+
+    private Targeter<ILiving> targeter;
     private MovementAlongPath movement;
+    private Damager damager;
 
     [Inject]
-    public void Construct(Settings settings, Life life, EnemyTargeter targeter, MovementAlongPath movement)
+    public void Construct(Life life, Targeter<ILiving> targeter, MovementAlongPath movement, Damager damager)
     {
         this.targeter = targeter;
-        this.life = life;
-        this.settings = settings;
+        this.Life = life;
         this.movement = movement;
-        targeter.OnTargetAcquired += DamageCastle;
+        this.damager = damager;
+        targeter.OnTargetAcquired += AttackTarget;
         life.OnLifeZero += OnDeath;
     }
 
-    private void DamageCastle(Castle castle)
+    private void AttackTarget(ILiving target)
     {
-        castle.TakeDamage(settings.damage);
+        damager.DoDamage(target);
         Destroy(gameObject);
     }
 
     private void OnDeath()
     {
-        life.OnLifeZero -= OnDeath;
+        Life.OnLifeZero -= OnDeath;
         Destroy(gameObject);
     }
 
     public Vector3 GetSpeed()
     {
         return movement.GetSpeed();
-    }
-
-    public void TakeDamage(float amount)
-    {
-        life.Change(-amount);
     }
 
     public class Factory : PlaceholderFactory<Enemy>
@@ -51,7 +47,7 @@ public class Enemy : MonoBehaviour
     {
         public TargetMovement.Settings movementSettings;
         public Life.Settings lifeSettings;
-        public float damage;
+        public Damager.Settings damagerSettings;
         public float loot;
     }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1784002578206394173}
   - component: {fileID: 6328554063944304197}
   - component: {fileID: 1544125973355151023}
+  - component: {fileID: 5620141487113824735}
   - component: {fileID: 1784002578206394172}
   - component: {fileID: 1784002578206394171}
   - component: {fileID: 1784002578206394170}
@@ -31,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1784002578206394169}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15, y: 2.25, z: 25}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 4, z: 2}
   m_Children:
   - {fileID: 4356517494829590803}
@@ -52,7 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers:
   - {fileID: 11400000, guid: ddcfc4e558e1fe5498d79daf8e36bd38, type: 2}
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 5620141487113824735}
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
@@ -74,6 +76,18 @@ MonoBehaviour:
   _useSceneContext: 0
   _context: {fileID: 6328554063944304197}
   _bindType: 0
+--- !u!114 &5620141487113824735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784002578206394169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa90a28ef70cf1046a07474261d6c423, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &1784002578206394172
 MeshFilter:
   m_ObjectHideFlags: 0

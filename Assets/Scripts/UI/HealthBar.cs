@@ -19,4 +19,9 @@ public class HealthBar : MonoBehaviour
     {
         slider.normalizedValue = value / target.Life.MaxValue;
     }
+
+    private void OnDestroy()
+    {
+        target.Life.OnLifeChanged -= SetHealthBar;
+    }
 }
