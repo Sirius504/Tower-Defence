@@ -1,0 +1,38 @@
+﻿using System;
+using UnityEngine;
+using Zenject;
+
+public class MovementAlongPath : MonoBehaviour
+{
+    private TargetMovement movement;
+    private Waypoints waypoints;
+    private int currentWaypointIndex = 0;
+
+    public event Action OnPathTraversed;
+
+    [Inject]
+    public void Construct(TargetMovement movement, Waypoints waypoints)
+    {
+        this.movement = movement;
+        this.waypoints = waypoints;
+        if (waypoints.WaypointsList.Count > 0)
+        {
+            movement.OnArrived += OnWaypointArrived;
+            movement.TargetTransform = waypoints.WaypointsList[currentWaypointIndex];
+        }
+    }
+
+    private void OnWaypointArrived()
+    {
+        if (currentWaypointIndex == waypoints.WaypointsList.Count - 1)
+            OnPathTraversed?.Invoke();
+        currentWaypointIndex = Mathf.Clamp(++currentWaypointIndex, 0, waypoints.WaypointsList.Count - 1);
+        movement.TargetTransform = waypoints.WaypointsList[currentWaypointIndex];
+    }
+
+    private void OnDestroy()
+    {
+        movement.OnArrived -= OnWaypointArrived;
+    }
+
+}
