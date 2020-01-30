@@ -30,6 +30,11 @@ public class MovementAlongPath : MonoBehaviour
         movement.TargetTransform = waypoints.WaypointsList[currentWaypointIndex];
     }
 
+    public Vector3 GetSpeed()
+    {
+        return movement.GetSpeed();
+    }
+
     private void OnDestroy()
     {
         movement.OnArrived -= OnWaypointArrived;

@@ -7,13 +7,15 @@ public class Enemy : MonoBehaviour
     private EnemyTargeter targeter;
     private Life life;
     private Settings settings;
+    private MovementAlongPath movement;
 
     [Inject]
-    public void Construct(Settings settings, Life life, EnemyTargeter targeter)
+    public void Construct(Settings settings, Life life, EnemyTargeter targeter, MovementAlongPath movement)
     {
         this.targeter = targeter;
         this.life = life;
         this.settings = settings;
+        this.movement = movement;
         targeter.OnTargetAcquired += DamageCastle;
         life.OnLifeZero += OnDeath;
     }
@@ -28,6 +30,11 @@ public class Enemy : MonoBehaviour
     {
         life.OnLifeZero -= OnDeath;
         Destroy(gameObject);
+    }
+
+    public Vector3 GetSpeed()
+    {
+        return movement.GetSpeed();
     }
 
     public void TakeDamage(float amount)

@@ -14,6 +14,6 @@ public class SendPlaySignal : MonoBehaviour
 
     public void SendSignal()
     {
-        signalBus.Fire(new PlaySignal());
+        signalBus.Fire(new RestartSignal());
     }
 }

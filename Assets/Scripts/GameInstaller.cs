@@ -4,7 +4,7 @@ using Zenject;
 public class GameInstaller : MonoInstaller
 {
     [SerializeField] private MovementAlongPath enemyPrefab;
-    [SerializeField] private Castle castle;
+    [SerializeField] private Castle castle;     
 
     public override void InstallBindings()
     {
@@ -12,5 +12,6 @@ public class GameInstaller : MonoInstaller
             .FromComponentInNewPrefab(enemyPrefab)
             .UnderTransformGroup("Enemies");
         Container.BindInstance(castle);
+        Container.BindInstance<ILiving>(castle);
     }
 }

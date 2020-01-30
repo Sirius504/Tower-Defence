@@ -1,26 +1,29 @@
-﻿using System;
+﻿using Signals;
+using System;
 using UnityEngine;
 using Zenject;
 
-public class Castle : MonoBehaviour
+public class Castle : MonoBehaviour, ILiving
 {
-    private Life life;
+    public Life Life { get; private set; }
+    private SignalBus signalBus;
 
     [Inject]
-    public void Construct(Life life)
+    public void Construct(Life life, SignalBus signalBus)
     {
-        this.life = life;
-        life.OnLifeZero += PrintGameOverDebug;
+        this.Life = life;
+        this.signalBus = signalBus;
+        life.OnLifeZero += SendGameOver;
     }
 
-    private void PrintGameOverDebug()
+    private void SendGameOver()
     {
-        Debug.Log("GameOver");
+        signalBus.Fire(new GameOverSignal());
     }
 
     public void TakeDamage(float amount)
     {
-        life.Change(-amount);
+        Life.Change(-amount);
     }
 
     [Serializable]

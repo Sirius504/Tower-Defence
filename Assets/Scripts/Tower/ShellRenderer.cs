@@ -16,11 +16,12 @@ public class ShellRenderer : MonoBehaviour
         lineRenderer.enabled = false;
     }
 
-    public void DrawShotAt(Vector3 target)
+    public void DrawShotAt(Vector3 target, Vector3 targetSpeed)
     {
         if (currentRoutine != null)
             StopCoroutine(currentRoutine);
-        currentRoutine = StartCoroutine(DrawArrowLine(target));
+
+        currentRoutine = StartCoroutine(DrawArrowLine(target + targetSpeed * animationTime));
     }
 
     private IEnumerator DrawArrowLine(Vector3 targetPosition)

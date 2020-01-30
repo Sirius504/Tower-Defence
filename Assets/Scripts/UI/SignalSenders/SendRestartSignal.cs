@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-public class SendVictorySignal : MonoBehaviour
+public class SendRestartSignal : MonoBehaviour
 {
     private SignalBus signalBus;
 
@@ -14,6 +14,6 @@ public class SendVictorySignal : MonoBehaviour
 
     public void SendSignal()
     {
-        signalBus.Fire(new VictorySignal());
+        signalBus.Fire(new RestartSignal());
     }
 }

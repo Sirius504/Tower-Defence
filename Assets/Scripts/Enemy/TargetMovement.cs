@@ -37,6 +37,12 @@ public class TargetMovement : MonoBehaviour
         eventFired = transform.position == target;
     }
 
+    public Vector3 GetSpeed()
+    {
+        var toTarget = target - transform.position;
+        return toTarget.normalized * settings.speed;
+    }
+
     private void HandleMovement(Vector3 toTarget)
     {
         transform.position = toTarget.sqrMagnitude < Mathf.Pow(settings.speed * Time.deltaTime, 2)

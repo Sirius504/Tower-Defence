@@ -218,7 +218,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 2008949078756221512}
   - component: {fileID: 792571673436626004}
   - component: {fileID: 1797167399886695590}
-  - component: {fileID: 6683740025826012414}
+  - component: {fileID: 6930489231791546074}
   m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
@@ -494,7 +494,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6683740025826012414}
+      - m_Target: {fileID: 6930489231791546074}
         m_MethodName: SendSignal
         m_Mode: 1
         m_Arguments:
@@ -505,7 +505,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &6683740025826012414
+--- !u!114 &6930489231791546074
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -514,7 +514,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2135381378292497164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91362e245d2179d4480529dfb64baac6, type: 3}
+  m_Script: {fileID: 11500000, guid: a25a2362ce79d314e82af31738d76ecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3123012351902437596
@@ -580,7 +580,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}

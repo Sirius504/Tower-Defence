@@ -13,6 +13,9 @@ namespace FiniteStateMachine
         [SerializeField] StatesDependencies statesDependencies;
         private FSM fsm;
 
+        LoadingState loadMainMenuState;
+        LoadingState restartState;
+
         public override void InstallBindings()
         {
             SignalBusInstaller.Install(Container);
@@ -23,41 +26,33 @@ namespace FiniteStateMachine
 
         private void InstallSignals()
         {
-            Container.DeclareSignal<PlaySignal>();
-            Container.BindSignal<PlaySignal>()
-                .ToMethod(s => TransitionOnSignal<PlayState>());
-            //Container.DeclareSignal<PauseSignal>();
-            //Container.BindSignal<PauseSignal>().ToMethod(OnPauseSignal);
+            Container.DeclareSignal<RestartSignal>();
+            Container.BindSignal<RestartSignal>()
+                .ToMethod(s => TransitionOnSignal(restartState));
             Container.DeclareSignal<GameOverSignal>();
             Container.BindSignal<GameOverSignal>()
                 .ToMethod(s => TransitionOnSignal<GameOverState>());
             Container.DeclareSignal<ExitSignal>();
             Container.BindSignal<ExitSignal>()
                 .ToMethod(s =>
-                TransitionOnSignal<LoadingState>());
-            Container.DeclareSignal<VictorySignal>();
-            Container.BindSignal<VictorySignal>()
-                .ToMethod(s => TransitionOnSignal<VictoryState>());
+                TransitionOnSignal(loadMainMenuState));
         }
 
         private IEnumerable<StateBase> CreateStates()
         {            
             var playState = new PlayState(statesDependencies.playStateDependencies);
             var gameOverState = new GameOverState(statesDependencies.gameOverStateDependencies);
-            var victoryState = new VictoryState(statesDependencies.victoryStateDependencies);
-            var loadingState = new LoadingState(0);
-            playState.Transitions.Add(new Transition(gameOverState));
-            playState.Transitions.Add(new Transition(victoryState));            
+            loadMainMenuState = new LoadingState(statesDependencies.mainMenuSceneIndex);
+            restartState = new LoadingState(statesDependencies.gameSceneIndex);
+            playState.Transitions.Add(new Transition(gameOverState));      
             gameOverState.Transitions.Add(new Transition(playState));
-            gameOverState.Transitions.Add(new Transition(loadingState));
-            victoryState.Transitions.Add(new Transition(playState));
-            victoryState.Transitions.Add(new Transition(loadingState));
+            gameOverState.Transitions.Add(new Transition(loadMainMenuState));
+            gameOverState.Transitions.Add(new Transition(restartState));
 
             return new List<StateBase>()
             {
                 playState,
-                gameOverState,
-                victoryState
+                gameOverState
             };
         }
 
@@ -72,14 +67,24 @@ namespace FiniteStateMachine
             fsm.ApplyTransition(transition);
         }
 
+        private void TransitionOnSignal(StateBase toState)
+        {
+            Transition transition = fsm.CurrentState.Transitions.FirstOrDefault(t => t.To.Equals(toState));
+            if (transition == null)
+            {
+                Debug.LogWarning($"Signal was sent but transition cannot be done.");
+                return;
+            }
+            fsm.ApplyTransition(transition);
+        }
+
         [Serializable]
         public class StatesDependencies
         {
-            //public PauseState.Dependencies pauseStateDependencies;
             public PlayState.Dependencies playStateDependencies;
             public GameOverState.Dependencies gameOverStateDependencies;
-            public MainMenuState.Dependencies mainMenuStateDependencies;
-            public VictoryState.Dependencies victoryStateDependencies;
+            public int mainMenuSceneIndex;
+            internal int gameSceneIndex;
         }
     }
 }
