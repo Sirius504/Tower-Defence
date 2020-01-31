@@ -344,4 +344,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationTime: 0.1
-  fadeOutTime: 0.2
+  fadeOutTime: 1.5

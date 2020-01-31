@@ -21,6 +21,12 @@ namespace Zenject
     public class DiContainer : IInstantiator
     {
         readonly Dictionary<Type, IDecoratorProvider> _decorators = new Dictionary<Type, IDecoratorProvider>();
+
+        public void BindInstance(object lootUpgradeParameters)
+        {
+            throw new NotImplementedException();
+        }
+
         readonly Dictionary<BindingId, List<ProviderInfo>> _providers = new Dictionary<BindingId, List<ProviderInfo>>();
 
         readonly DiContainer[][] _containerLookups = new DiContainer[4][];

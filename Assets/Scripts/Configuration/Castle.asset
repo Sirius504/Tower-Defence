@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Castle
   m_EditorClassIdentifier: 
   castleSettings:
-    lifeSettings:
-      maxValue: 2
+    healthSettings:
+      maxValue: 300

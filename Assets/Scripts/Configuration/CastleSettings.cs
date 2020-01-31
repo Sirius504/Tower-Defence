@@ -8,6 +8,6 @@ public class CastleSettings : ScriptableObjectInstaller
 
     public override void InstallBindings()
     {
-        Container.BindInstance(castleSettings.lifeSettings);
+        Container.BindInstance(castleSettings.healthSettings);
     }
 }

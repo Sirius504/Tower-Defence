@@ -14,7 +14,7 @@ namespace FiniteStateMachine.States
 
         public override void OnEnter()
         {
-            var operation = SceneManager.LoadSceneAsync(sceneIndex);
+            SceneManager.LoadScene(sceneIndex);
         }
     }
 }

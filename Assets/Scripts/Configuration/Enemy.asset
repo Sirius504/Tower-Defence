@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58849e1712e67744b370fcba9045d8b, type: 3}
   m_Name: Enemy
   m_EditorClassIdentifier: 
-  settings:
-    movementSettings:
-      speed: 20
-      rotationSpeed: 5
-    lifeSettings:
-      maxValue: 5
-    damage: 1
-    loot: 10
+  parameters:
+    movementParameters:
+      speed: 5
+      rotationSpeed: 10
+    healthParameters:
+      maxValue: 3
+    damagerParameters:
+      damage: 1
+    lootParameters:
+      amount: 10

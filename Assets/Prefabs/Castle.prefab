@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 8557624616957399431}
   - component: {fileID: 8557624616957399430}
   - component: {fileID: 8557624616957399429}
+  - component: {fileID: 5775055195541804870}
   - component: {fileID: 8557624616957399428}
   - component: {fileID: 8557624616957399427}
   - component: {fileID: 8557624616957399426}
   - component: {fileID: 8557624616957399425}
   - component: {fileID: 8557624616957399424}
-  - component: {fileID: 8557624616957399439}
+  - component: {fileID: 8165655931911691625}
   m_Layer: 0
   m_Name: Castle
   m_TagString: Untagged
@@ -53,7 +54,7 @@ MonoBehaviour:
   _scriptableObjectInstallers:
   - {fileID: 11400000, guid: 4e3fb636a02d1784ebdf457df089808e, type: 2}
   _monoInstallers:
-  - {fileID: 8557624616957399439}
+  - {fileID: 8165655931911691625}
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
@@ -73,8 +74,26 @@ MonoBehaviour:
   - {fileID: 8557624616957399427}
   _identifier: 
   _useSceneContext: 0
-  _context: {fileID: 0}
+  _context: {fileID: 8557624616957399430}
   _bindType: 0
+--- !u!114 &5775055195541804870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8557624616957399438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 8557624616957399425}
+  _identifier: 
+  _useSceneContext: 1
+  _context: {fileID: 0}
+  _bindType: 2
 --- !u!33 &8557624616957399428
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -161,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagedMaterial: {fileID: 2100000, guid: f8243392880a1804593a1b3f14a8208f, type: 2}
---- !u!114 &8557624616957399439
+--- !u!114 &8165655931911691625
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,6 +189,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8557624616957399438}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1279dd8ed528d044845bab425f47817, type: 3}
+  m_Script: {fileID: 11500000, guid: b4e1f4edc6030dd4494b10cc9954a764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

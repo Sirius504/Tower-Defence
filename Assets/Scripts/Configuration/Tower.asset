@@ -15,5 +15,6 @@ MonoBehaviour:
   towerSettings:
     targeterSettings:
       radius: 15
-      fireRate: 1
-    damage: 1
+      fireRate: 0.5
+    damagerSettings:
+      damage: 1

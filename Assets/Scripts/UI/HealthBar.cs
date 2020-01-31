@@ -8,20 +8,24 @@ public class HealthBar : MonoBehaviour
     private ILiving target;
 
     [Inject]
-    public void Contruct(Slider slider, ILiving target)
+    public void Construct(Slider slider, ILiving target)
     {
         this.slider = slider;
         this.target = target;
-        target.Life.OnLifeChanged += SetHealthBar;
+    }
+
+    public void Start()
+    {
+        target.Health.OnHealthChanged += SetHealthBar;
     }
 
     private void SetHealthBar(float value)
     {
-        slider.normalizedValue = value / target.Life.MaxValue;
+        slider.normalizedValue = value / target.Health.MaxValue;
     }
 
     private void OnDestroy()
     {
-        target.Life.OnLifeChanged -= SetHealthBar;
+        target.Health.OnHealthChanged -= SetHealthBar;
     }
 }
