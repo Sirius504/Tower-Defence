@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using TowerDefence.Common;
 using TowerDefence.Gameplay.Damage;
 using TowerDefence.Gameplay.HealthSystem;
 using TowerDefence.Gameplay.LootSystem;
@@ -18,7 +18,7 @@ namespace TowerDefence.Gameplay.EnemySystem
         private int currentLootLevel = 0;
         private readonly LootUpgrades lootUpgrades;
 
-        private Dictionary<UpgradeTypes, int> upgradeProbabilities;
+        private readonly WeightedRandom<UpgradeTypes> upgradeProbabilities;
         public Enemy.Parameters CurrentParameters { get; private set; }
 
         public EnemyUpgrades(Enemy.Parameters defaultEnemyParameters,
@@ -33,37 +33,19 @@ namespace TowerDefence.Gameplay.EnemySystem
             this.lootUpgrades = lootUpgrades;
             CurrentParameters = (Enemy.Parameters)defaultEnemyParameters.Clone();
 
-            upgradeProbabilities = new Dictionary<UpgradeTypes, int>()
-        {
-            { UpgradeTypes.Damage, 5 },
-            { UpgradeTypes.Health, 5 },
-            { UpgradeTypes.Loot,   5 }
-        };
+            upgradeProbabilities = new WeightedRandom<UpgradeTypes>(new Dictionary<UpgradeTypes, int>()
+            {
+                { UpgradeTypes.Damage, 5 },
+                { UpgradeTypes.Health, 5 },
+                { UpgradeTypes.Loot,   5 }
+            });
         }
 
         public void Upgrade()
         {
-            var upgrades = (UpgradeTypes[])Enum.GetValues(typeof(UpgradeTypes));
-            int numberOfUpgrades = UnityEngine.Random.Range(1, upgrades.Length + 1);
-            var upgradesPool = new Dictionary<UpgradeTypes, int>(upgradeProbabilities);
-            for (int i = 0; i < numberOfUpgrades; i++)
-            {
-                int weightsSum = upgradesPool.Values.Sum();
-                int currentWeight = 0;
-                int randomValue = UnityEngine.Random.Range(0, weightsSum);
-                UpgradeTypes resultUpgradeType = UpgradeTypes.Health;
-                foreach (var upgradeProbability in upgradesPool)
-                {
-                    resultUpgradeType = upgradeProbability.Key;
-                    currentWeight += upgradeProbability.Value;
-                    if (currentWeight >= randomValue)
-                        break;
-                }
-                UpgradeParameter(resultUpgradeType);
-                upgradesPool.Remove(resultUpgradeType);
-            }
-
-            return;
+            int numberOfUpgrades = UnityEngine.Random.Range(1, upgradeProbabilities.Weights.Count + 1);
+            foreach (var upgrade in upgradeProbabilities.DrawNRandom(numberOfUpgrades))
+                UpgradeParameter(upgrade);
         }
 
         private void UpgradeParameter(UpgradeTypes resultUpgradeType)
@@ -104,6 +86,6 @@ namespace TowerDefence.Gameplay.EnemySystem
             [SerializeField] private LootUpgrades.Parameters lootUpgradeParameters;
             public LootUpgrades.Parameters LootUpgradeParameters => lootUpgradeParameters;
         }
-    } 
+    }
 }
 
