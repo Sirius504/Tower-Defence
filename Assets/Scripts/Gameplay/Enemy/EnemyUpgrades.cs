@@ -40,7 +40,6 @@ public class EnemyUpgrades
     {
         var upgrades = (UpgradeTypes[])Enum.GetValues(typeof(UpgradeTypes));
         int numberOfUpgrades = UnityEngine.Random.Range(1, upgrades.Length + 1);
-        Debug.Log($"Number of upgrades: {numberOfUpgrades}");
         var upgradesPool = new Dictionary<UpgradeTypes, int>(upgradeProbabilities);
         for (int i = 0; i < numberOfUpgrades; i++)
         {
@@ -58,14 +57,8 @@ public class EnemyUpgrades
             UpgradeParameter(resultUpgradeType);
             upgradesPool.Remove(resultUpgradeType);
         }
-        PrintCurrentParameters();
 
         return;
-    }
-
-    private void PrintCurrentParameters()
-    {
-        Debug.Log($"Parameters: \n\tHealth: {CurrentParameters.HealthParameters.MaxValue}; \n\t Damage: {CurrentParameters.DamagerParameters.Damage}; \n\t Loot: {CurrentParameters.LootParameters.Amount}");
     }
 
     private void UpgradeParameter(UpgradeTypes resultUpgradeType)
@@ -87,7 +80,6 @@ public class EnemyUpgrades
             default:
                 throw new ArgumentException("resultUpgradeType", "Unreachable code reached");
         }
-        Debug.Log($"{resultUpgradeType} was upgraded!");
     }
 
     public enum UpgradeTypes
