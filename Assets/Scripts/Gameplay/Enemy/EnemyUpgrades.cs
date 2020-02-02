@@ -1,12 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyUpgrades
 {
     private readonly Enemy.Parameters defaultEnemyParameters;
+    private int currentHealthLevel = 0;
     private readonly HealthUpgrades healthUpgrades;
+    private int currentDamagerLevel = 0;
     private readonly DamagerUpgrades damagerUpgrades;
+    private int currentLootLevel = 0;
     private readonly LootUpgrades lootUpgrades;
+
+    private Dictionary<UpgradeTypes, int> upgradeProbabilities;
+    public Enemy.Parameters CurrentParameters { get; private set; }
 
     public EnemyUpgrades(Enemy.Parameters defaultEnemyParameters,
         Parameters upgradeParameters,
@@ -18,15 +26,75 @@ public class EnemyUpgrades
         this.healthUpgrades = healthUpgrades;
         this.damagerUpgrades = damagerUpgrades;
         this.lootUpgrades = lootUpgrades;
+        CurrentParameters = defaultEnemyParameters;
+
+        upgradeProbabilities = new Dictionary<UpgradeTypes, int>()
+        {
+            { UpgradeTypes.Damage, 5 },
+            { UpgradeTypes.Health, 5 },
+            { UpgradeTypes.Loot,   5 }
+        };
     }
-    
-    public Enemy.Parameters GetUpgraded(int level = 0)
-    {        
-        var healthParameters = healthUpgrades.GetUpgraded(level);
-        var movementParameters = defaultEnemyParameters.MovementParameters;
-        var damageParameters = damagerUpgrades.GetUpgraded(level);
-        var lootParameters = lootUpgrades.GetUpgraded(level);
-        return new Enemy.Parameters(movementParameters, healthParameters, damageParameters, lootParameters);
+
+    public void Upgrade()
+    {
+        var upgrades = (UpgradeTypes[])Enum.GetValues(typeof(UpgradeTypes));
+        int numberOfUpgrades = UnityEngine.Random.Range(1, upgrades.Length + 1);
+        Debug.Log($"Number of upgrades: {numberOfUpgrades}");
+        var upgradesPool = new Dictionary<UpgradeTypes, int>(upgradeProbabilities);
+        for (int i = 0; i < numberOfUpgrades; i++)
+        {
+            int weightsSum = upgradesPool.Values.Sum();
+            int currentWeight = 0;
+            int randomValue = UnityEngine.Random.Range(0, weightsSum);
+            UpgradeTypes resultUpgradeType = UpgradeTypes.Health;
+            foreach(var upgradeProbability in upgradesPool)
+            {
+                resultUpgradeType = upgradeProbability.Key;
+                currentWeight += upgradeProbability.Value;
+                if (currentWeight >= randomValue)
+                    break;
+            }
+            UpgradeParameter(resultUpgradeType);
+            upgradesPool.Remove(resultUpgradeType);
+        }
+        PrintCurrentParameters();
+
+        return;
+    }
+
+    private void PrintCurrentParameters()
+    {
+        Debug.Log($"Parameters: \n\tHealth: {CurrentParameters.HealthParameters.MaxValue}; \n\t Damage: {CurrentParameters.DamagerParameters.Damage}; \n\t Loot: {CurrentParameters.LootParameters.Amount}");
+    }
+
+    private void UpgradeParameter(UpgradeTypes resultUpgradeType)
+    {
+        switch (resultUpgradeType)
+        {
+            case UpgradeTypes.Health:
+                currentHealthLevel++;
+                CurrentParameters.HealthParameters = healthUpgrades.GetUpgraded(currentHealthLevel);
+                break;
+            case UpgradeTypes.Damage:
+                currentDamagerLevel++;
+                CurrentParameters.DamagerParameters = damagerUpgrades.GetUpgraded(currentDamagerLevel);
+                break;
+            case UpgradeTypes.Loot:
+                currentLootLevel++;
+                CurrentParameters.LootParameters = lootUpgrades.GetUpgraded(currentLootLevel);
+                break;
+            default:
+                throw new ArgumentException("resultUpgradeType", "Unreachable code reached");
+        }
+        Debug.Log($"{resultUpgradeType} was upgraded!");
+    }
+
+    public enum UpgradeTypes
+    {
+        Health,
+        Damage,
+        Loot
     }
 
     [Serializable]

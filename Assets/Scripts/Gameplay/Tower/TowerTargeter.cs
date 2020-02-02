@@ -5,11 +5,11 @@ using Zenject;
 
 public class TowerTargeter : Targeter<Enemy>
 {
-    private Settings settings;
+    private Parameters settings;
     private float lastShotTime;
 
     [Inject]
-    public void Construct(Settings settings)
+    public void Construct(Parameters settings)
     {
         this.settings = settings;
     }
@@ -46,7 +46,7 @@ public class TowerTargeter : Targeter<Enemy>
     }
 
     [Serializable]
-    public class Settings
+    public class Parameters
     {
         public float radius = 10f;
         public float fireRate = 1f;

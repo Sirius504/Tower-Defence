@@ -32,7 +32,8 @@ public class WavesController : MonoBehaviour
     private EnemyWaveInfo CreateNewWave(int level)
     {
         int enemiesCount = level + UnityEngine.Random.Range(0, parameters.EnemyCountModifier + 1);
-        return new EnemyWaveInfo(enemiesCount, parameters.SpawnRate, enemyUpgrades.GetUpgraded(level - 1));
+        enemyUpgrades.Upgrade();
+        return new EnemyWaveInfo(enemiesCount, parameters.SpawnRate, enemyUpgrades.CurrentParameters);
     }
 
     private IEnumerator SpawnNewWaveAfterDelay()

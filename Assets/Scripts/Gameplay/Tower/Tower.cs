@@ -5,16 +5,16 @@ using Zenject;
 public class Tower : MonoBehaviour
 {
     private float lastShotTime;
-    private Settings settings;
+    private Parameters parameters;
     private ShellRenderer shellRenderer;
     private Targeter<Enemy> targeter;
     private Damager damager;
 
 
     [Inject]
-    public void Construct(Settings settings, ShellRenderer shellRenderer, TowerTargeter targeter, Damager damager)
+    public void Construct(Parameters parameters, ShellRenderer shellRenderer, TowerTargeter targeter, Damager damager)
     {        
-        this.settings = settings;
+        this.parameters = parameters;
         this.shellRenderer = shellRenderer;
         this.targeter = targeter;
         this.damager = damager;
@@ -33,9 +33,11 @@ public class Tower : MonoBehaviour
     }
 
     [Serializable]
-    public class Settings
+    public class Parameters
     {
-        public TowerTargeter.Settings targeterSettings;
-        public Damager.Parameters damagerSettings;
+        [SerializeField] private TowerTargeter.Parameters targeterParameters;
+        public TowerTargeter.Parameters TargeterParameters => targeterParameters;
+        [SerializeField] private Damager.Parameters damagerParameters;
+        public Damager.Parameters DamagerParameters => damagerParameters;
     }
 }

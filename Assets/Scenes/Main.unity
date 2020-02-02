@@ -1430,8 +1430,8 @@ MonoBehaviour:
   _components:
   - {fileID: 1005696304}
   _identifier: 
-  _useSceneContext: 0
-  _context: {fileID: 1005696308}
+  _useSceneContext: 1
+  _context: {fileID: 0}
   _bindType: 0
 --- !u!114 &1005696308
 MonoBehaviour:
@@ -3698,6 +3698,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8557624616957399424, guid: 8fb0b84575cd9ff42af3dfad5501ffb8,
+        type: 3}
+      propertyPath: damagedColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8557624616957399424, guid: 8fb0b84575cd9ff42af3dfad5501ffb8,
+        type: 3}
+      propertyPath: damagedColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8557624616957399424, guid: 8fb0b84575cd9ff42af3dfad5501ffb8,
+        type: 3}
+      propertyPath: damagedColor.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8557624616957399431, guid: 8fb0b84575cd9ff42af3dfad5501ffb8,
         type: 3}
       propertyPath: m_LocalPosition.x

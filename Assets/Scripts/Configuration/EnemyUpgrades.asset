@@ -17,3 +17,5 @@ MonoBehaviour:
       upgradeStep: 1
     damagerUpgradeParameters:
       upgradeStep: 1
+    lootUpgradeParameters:
+      upgradeStep: 2

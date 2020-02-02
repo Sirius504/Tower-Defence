@@ -11,5 +11,6 @@ public class GameInstaller : MonoInstaller
             .FromComponentInNewPrefab(enemyPrefab)
             .UnderTransformGroup("Enemies");
         Container.Bind<Gold>().AsSingle();
+        Container.Bind<KilledEnemyCounter>().AsSingle();
     }
 }

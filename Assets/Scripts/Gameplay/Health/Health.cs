@@ -22,7 +22,8 @@ public class Health
         switch (healthChangeMode)
         {
             case HealthChangeMode.DontChange:
-                return;
+                Value = Mathf.Min(Value, MaxValue);
+                break;
             case HealthChangeMode.Restore:
                 Value = MaxValue;
                 break;

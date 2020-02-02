@@ -6,12 +6,12 @@ public class CastleRenderer : MonoBehaviour
 {
     private MeshRenderer meshRenderer;
     private Health health;
-    [SerializeField] private Material damagedMaterial;
-    private Material startMaterial;
+    [SerializeField] private Color damagedColor;
+    private Color startColor;
 
     private void Start()
     {
-        startMaterial = meshRenderer.material;
+        startColor = meshRenderer.material.color;
     }
 
     [Inject]
@@ -28,6 +28,6 @@ public class CastleRenderer : MonoBehaviour
 
     private void ChangeColor(float healthValue)
     {
-        meshRenderer.material.Lerp(startMaterial, damagedMaterial, 1 - healthValue / health.MaxValue);
+        meshRenderer.material.color = Color.Lerp(startColor, damagedColor, 1 - healthValue / health.MaxValue);
     }
 }

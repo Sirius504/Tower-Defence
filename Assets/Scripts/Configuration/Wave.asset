@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelParameters:
     spawnRate: 1
-    delayBetweenWaves: 6
-    enemyCountModifier: 4
+    delayBetweenWaves: 2
+    enemyCountModifier: 5

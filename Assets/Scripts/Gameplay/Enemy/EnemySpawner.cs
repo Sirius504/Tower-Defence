@@ -12,6 +12,7 @@ public class EnemySpawner : MonoBehaviour
     private Enemy.Factory enemyFactory;
 
     public event Action OnWaveFinished;
+    public event Action<Enemy> OnEnemySpawned;
 
     [Inject]
     public void Construct(Enemy.Factory enemyFactory)
@@ -52,6 +53,7 @@ public class EnemySpawner : MonoBehaviour
         newEnemy.transform.position = transform.position;
         newEnemy.transform.rotation = transform.rotation;
         lastSpawnTime = Time.time;
+        OnEnemySpawned?.Invoke(newEnemy);
         if (++spawnedFromCurrentWave >= currentWaveInfo.Amount)
             OnWaveSpawnFinished();
     }

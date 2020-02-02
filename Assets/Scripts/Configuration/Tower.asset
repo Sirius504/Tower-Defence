@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Tower
   m_EditorClassIdentifier: 
   towerSettings:
-    targeterSettings:
+    targeterParameters:
       radius: 15
-      fireRate: 0.5
-    damagerSettings:
+      fireRate: 1
+    damagerParameters:
       damage: 1
