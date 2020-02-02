@@ -1,20 +1,19 @@
-﻿using FiniteStateMachine.States;
-using Signals;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TowerDefence.FiniteStateMachine.States;
+using TowerDefence.Signals;
 using UnityEngine;
 using Zenject;
 
-namespace FiniteStateMachine
+namespace TowerDefence.FiniteStateMachine
 {
     public class FSMInstaller : MonoInstaller
     {
-        [SerializeField] StatesDependencies statesDependencies;
+        [SerializeField] private StatesDependencies statesDependencies;
         private FSM fsm;
-
-        LoadingState loadMainMenuState;
-        LoadingState restartState;
+        private LoadingState loadMainMenuState;
+        private LoadingState restartState;
 
         public override void InstallBindings()
         {
@@ -39,12 +38,12 @@ namespace FiniteStateMachine
         }
 
         private IEnumerable<StateBase> CreateStates()
-        {            
+        {
             var playState = new PlayState(statesDependencies.playStateDependencies);
             var gameOverState = new GameOverState(statesDependencies.gameOverStateDependencies);
             loadMainMenuState = new LoadingState(statesDependencies.mainMenuSceneIndex);
             restartState = new LoadingState(statesDependencies.gameSceneIndex);
-            playState.Transitions.Add(new Transition(gameOverState));      
+            playState.Transitions.Add(new Transition(gameOverState));
             gameOverState.Transitions.Add(new Transition(playState));
             gameOverState.Transitions.Add(new Transition(loadMainMenuState));
             gameOverState.Transitions.Add(new Transition(restartState));
@@ -56,7 +55,7 @@ namespace FiniteStateMachine
             };
         }
 
-        private void TransitionOnSignal<T>() where T: StateBase
+        private void TransitionOnSignal<T>() where T : StateBase
         {
             Transition transition = fsm.CurrentState.Transitions.FirstOrDefault(t => t.To is T);
             if (transition == null)

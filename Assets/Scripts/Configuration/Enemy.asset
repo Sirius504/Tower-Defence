@@ -17,8 +17,8 @@ MonoBehaviour:
       speed: 10
       rotationSpeed: 10
     healthParameters:
-      maxValue: 3
+      maxValue: 10
     damagerParameters:
-      damage: 1
+      damage: 13
     lootParameters:
-      amount: 10
+      amount: 30

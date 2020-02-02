@@ -1,5 +1,8 @@
-﻿public interface ILiving
+﻿namespace TowerDefence.Gameplay.HealthSystem
 {
-    Health Health { get; }
+    public interface ILiving
+    {
+        Health Health { get; }
+    } 
 }
 

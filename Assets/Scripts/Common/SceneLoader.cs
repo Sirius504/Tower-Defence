@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+namespace TowerDefence.Common
 {
-    [SerializeField] int sceneIndex;
-
-    public void LoadScene()
+    public class SceneLoader : MonoBehaviour
     {
-        SceneManager.LoadScene(sceneIndex);
-    }    
+        [SerializeField] int sceneIndex;
+
+        public void LoadScene()
+        {
+            SceneManager.LoadScene(sceneIndex);
+        }
+    } 
 }

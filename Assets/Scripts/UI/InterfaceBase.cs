@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
-public abstract class InterfaceBase : MonoBehaviour
+namespace TowerDefence.UI
 {
-    public abstract void Open();
-    public abstract void Close();
+    public abstract class InterfaceBase : MonoBehaviour
+    {
+        public abstract void Open();
+        public abstract void Close();
+    } 
 }

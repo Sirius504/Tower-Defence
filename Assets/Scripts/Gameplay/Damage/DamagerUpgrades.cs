@@ -1,27 +1,30 @@
 ﻿using System;
 using UnityEngine;
 
-public class DamagerUpgrades
+namespace TowerDefence.Gameplay.Damage
 {
-    private readonly Parameters parameters;
-    private readonly Damager.Parameters defaultDamagerParameters;
-
-    public DamagerUpgrades(Parameters parameters, Damager.Parameters defaultDamagerParameters)
+    public class DamagerUpgrades
     {
-        this.parameters = parameters;
-        this.defaultDamagerParameters = defaultDamagerParameters;
-    }
+        private readonly Parameters parameters;
+        private readonly Damager.Parameters defaultDamagerParameters;
 
-    public Damager.Parameters GetUpgraded(int level = 0)
-    {
-        return new Damager.Parameters(defaultDamagerParameters.Damage + level);
-    }
+        public DamagerUpgrades(Parameters parameters, Damager.Parameters defaultDamagerParameters)
+        {
+            this.parameters = parameters;
+            this.defaultDamagerParameters = defaultDamagerParameters;
+        }
 
-    [Serializable]
-    public class Parameters
-    {
-        [SerializeField] private int upgradeStep;
-        public int UpgradeStep => upgradeStep;
-    }
+        public Damager.Parameters GetUpgraded(int level = 0)
+        {
+            return new Damager.Parameters(defaultDamagerParameters.Damage + level);
+        }
+
+        [Serializable]
+        public class Parameters
+        {
+            [SerializeField] private int upgradeStep;
+            public int UpgradeStep => upgradeStep;
+        }
+    } 
 }
 

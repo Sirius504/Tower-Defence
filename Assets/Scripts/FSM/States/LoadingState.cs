@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace FiniteStateMachine.States
+namespace TowerDefence.FiniteStateMachine.States
 {
     public class LoadingState : StateBase
     {

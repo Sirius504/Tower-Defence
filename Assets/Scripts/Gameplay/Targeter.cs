@@ -1,13 +1,16 @@
 ﻿using System;
 using UnityEngine;
 
-public abstract class Targeter<T> : MonoBehaviour
+namespace TowerDefence.Gameplay
 {
-    public T CurrentTarget { get; protected set; }
-    public event Action<T> OnTargetAcquired;
-
-    protected void InvokeOnTargetAcquired(T target)
+    public abstract class Targeter<T> : MonoBehaviour
     {
-        OnTargetAcquired?.Invoke(target);
-    }
+        public T CurrentTarget { get; protected set; }
+        public event Action<T> OnTargetAcquired;
+
+        protected void InvokeOnTargetAcquired(T target)
+        {
+            OnTargetAcquired?.Invoke(target);
+        }
+    } 
 }

@@ -1,38 +1,42 @@
-﻿using Signals;
-using System;
+﻿using System;
+using TowerDefence.Gameplay.HealthSystem;
+using TowerDefence.Signals;
 using UnityEngine;
 using Zenject;
 
-public class Castle : MonoBehaviour, ILiving
+namespace TowerDefence.Gameplay.CastleSystem
 {
-    public Health Health { get; private set; }
-    private SignalBus signalBus;
-
-    [Inject]
-    public void Construct(Health health, SignalBus signalBus)
+    public class Castle : MonoBehaviour, ILiving
     {
-        this.Health = health;
-        this.signalBus = signalBus;
-    }
+        public Health Health { get; private set; }
+        private SignalBus signalBus;
 
-    public void Start()
-    {
-        Health.OnHealthZero += SendGameOver;
-    }
+        [Inject]
+        public void Construct(Health health, SignalBus signalBus)
+        {
+            Health = health;
+            this.signalBus = signalBus;
+        }
 
-    private void SendGameOver()
-    {
-        signalBus.Fire(new GameOverSignal());
-    }
+        public void Start()
+        {
+            Health.OnHealthZero += SendGameOver;
+        }
 
-    public void TakeDamage(int amount)
-    {
-        Health.Change(-amount);
-    }
+        private void SendGameOver()
+        {
+            signalBus.Fire(new GameOverSignal());
+        }
 
-    [Serializable]
-    public class Settings
-    {
-        public Health.Parameters healthSettings;
+        public void TakeDamage(int amount)
+        {
+            Health.Change(-amount);
+        }
+
+        [Serializable]
+        public class Settings
+        {
+            public Health.Parameters healthSettings;
+        }
     }
 }

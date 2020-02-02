@@ -1,23 +1,26 @@
 ﻿using System;
 using UnityEngine;
 
-public class Gold
+namespace TowerDefence.Gameplay.LootSystem
 {
-    public int Amount { get; private set; }
-    public event Action<int> OnChanged;
-
-    public bool TrySpend(int delta)
+    public class Gold
     {
-        if (Amount - delta < 0)
+        public int Amount { get; private set; }
+        public event Action<int> OnChanged;
+
+        public bool TrySpend(int delta)
+        {
+            if (Amount - delta < 0)
+                return false;
+            Amount -= delta;
+            OnChanged?.Invoke(Amount);
             return false;
-        Amount -= delta;
-        OnChanged?.Invoke(Amount);
-        return false;
-    }
+        }
 
-    public void Add(int delta)
-    {
-        Amount += delta;
-        OnChanged?.Invoke(Amount);
-    }
+        public void Add(int delta)
+        {
+            Amount += delta;
+            OnChanged?.Invoke(Amount);
+        }
+    } 
 }

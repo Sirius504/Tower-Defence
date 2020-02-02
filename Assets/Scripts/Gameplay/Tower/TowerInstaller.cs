@@ -1,10 +1,13 @@
-using UnityEngine;
+using TowerDefence.Gameplay.Damage;
 using Zenject;
 
-public class TowerInstaller : MonoInstaller
+namespace TowerDefence.Gameplay.TowerSystem
 {
-    public override void InstallBindings()
+    public class TowerInstaller : MonoInstaller
     {
-        Container.Bind<Damager>().AsSingle();
+        public override void InstallBindings()
+        {
+            Container.Bind<Damager>().AsSingle();
+        }
     }
 }

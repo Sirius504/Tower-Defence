@@ -1,33 +1,37 @@
 ﻿using System;
+using TowerDefence.Gameplay.HealthSystem;
 using UnityEngine;
 using Zenject;
 
-public class CastleRenderer : MonoBehaviour
+namespace TowerDefence.Gameplay.CastleSystem
 {
-    private MeshRenderer meshRenderer;
-    private Health health;
-    [SerializeField] private Color damagedColor;
-    private Color startColor;
-
-    private void Start()
+    public class CastleRenderer : MonoBehaviour
     {
-        startColor = meshRenderer.material.color;
-    }
+        private MeshRenderer meshRenderer;
+        private Health health;
+        [SerializeField] private Color damagedColor;
+        private Color startColor;
 
-    [Inject]
-    public void Construct(MeshRenderer meshRenderer, Castle castle)
-    {
-        this.meshRenderer = meshRenderer;
-        this.health = castle.Health;
-    }
+        private void Start()
+        {
+            startColor = meshRenderer.material.color;
+        }
 
-    public void Awake()
-    {
-        health.OnHealthChanged += ChangeColor;
-    }
+        [Inject]
+        public void Construct(MeshRenderer meshRenderer, Castle castle)
+        {
+            this.meshRenderer = meshRenderer;
+            this.health = castle.Health;
+        }
 
-    private void ChangeColor(float healthValue)
-    {
-        meshRenderer.material.color = Color.Lerp(startColor, damagedColor, 1 - healthValue / health.MaxValue);
-    }
+        public void Awake()
+        {
+            health.OnHealthChanged += ChangeColor;
+        }
+
+        private void ChangeColor(float healthValue)
+        {
+            meshRenderer.material.color = Color.Lerp(startColor, damagedColor, 1 - healthValue / health.MaxValue);
+        }
+    } 
 }

@@ -2,23 +2,26 @@
 using UnityEngine;
 
 
-public static class CoroutineSingleton
+namespace TowerDefence.Common
 {
-    private static MonoBehaviour monoBehaviour;
-
-    public static void StartCoroutine(IEnumerator routine)
+    public static class CoroutineSingleton
     {
-        if (monoBehaviour == null)
+        private static MonoBehaviour monoBehaviour;
+
+        public static void StartCoroutine(IEnumerator routine)
         {
-            var gameObject = new GameObject("Coroutines");
-            monoBehaviour = gameObject.AddComponent<CoroutinesBehaviour>();
+            if (monoBehaviour == null)
+            {
+                var gameObject = new GameObject("Coroutines");
+                monoBehaviour = gameObject.AddComponent<CoroutinesBehaviour>();
+            }
+            monoBehaviour.StartCoroutine(routine);
         }
-        monoBehaviour.StartCoroutine(routine);
     }
-}
 
-public class CoroutinesBehaviour : MonoBehaviour
-{
+    public class CoroutinesBehaviour : MonoBehaviour
+    {
 
+    } 
 }
 

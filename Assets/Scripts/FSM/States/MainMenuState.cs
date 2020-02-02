@@ -1,6 +1,7 @@
 ﻿using System;
+using TowerDefence.UI;
 
-namespace FiniteStateMachine.States
+namespace TowerDefence.FiniteStateMachine.States
 {
     public class MainMenuState : StateBase
     {

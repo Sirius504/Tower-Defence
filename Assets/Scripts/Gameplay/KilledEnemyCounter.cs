@@ -1,29 +1,33 @@
 ﻿using System;
+using TowerDefence.Gameplay.EnemySystem;
 using Zenject;
 
-public class KilledEnemyCounter
+namespace TowerDefence.Gameplay
 {
-    private readonly EnemySpawner enemySpawner;
-
-    public int Killed { get; private set; } = 0;
-    public event Action<int> OnChange;
-
-    [Inject]
-    public KilledEnemyCounter(EnemySpawner enemySpawner)
+    public class KilledEnemyCounter
     {
-        this.enemySpawner = enemySpawner;
-        enemySpawner.OnEnemySpawned += OnEnemySpawned;
-    }
+        private readonly EnemySpawner enemySpawner;
 
-    private void OnEnemySpawned(Enemy enemy)
-    {
-        enemy.Health.OnHealthZero += OnEnemyKilled;
-    }
+        public int Killed { get; private set; } = 0;
+        public event Action<int> OnChange;
 
-    private void OnEnemyKilled()
-    {
-        Killed++;
-        OnChange?.Invoke(Killed);
-    }
+        [Inject]
+        public KilledEnemyCounter(EnemySpawner enemySpawner)
+        {
+            this.enemySpawner = enemySpawner;
+            enemySpawner.OnEnemySpawned += OnEnemySpawned;
+        }
+
+        private void OnEnemySpawned(Enemy enemy)
+        {
+            enemy.Health.OnHealthZero += OnEnemyKilled;
+        }
+
+        private void OnEnemyKilled()
+        {
+            Killed++;
+            OnChange?.Invoke(Killed);
+        }
+    } 
 }
 

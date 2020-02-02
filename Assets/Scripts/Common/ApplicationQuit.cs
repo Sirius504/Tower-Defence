@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 
-public class ApplicationQuit : MonoBehaviour
+namespace TowerDefence.Common
 {
-    public void CloseApp()
+    public class ApplicationQuit : MonoBehaviour
     {
-        Application.Quit(0);
-    }
+        public void CloseApp()
+        {
+            Application.Quit(0);
+        }
+    } 
 }

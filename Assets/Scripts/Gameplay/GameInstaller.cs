@@ -1,16 +1,22 @@
-﻿using UnityEngine;
+﻿using TowerDefence.Gameplay.EnemySystem;
+using TowerDefence.Gameplay.LootSystem;
+using TowerDefence.Gameplay.Movement;
+using UnityEngine;
 using Zenject;
 
-public class GameInstaller : MonoInstaller
+namespace TowerDefence.Gameplay
 {
-    [SerializeField] private MovementAlongPath enemyPrefab;
-
-    public override void InstallBindings()
+    public class GameInstaller : MonoInstaller
     {
-        Container.BindFactory<Enemy, Enemy.Factory>()
-            .FromComponentInNewPrefab(enemyPrefab)
-            .UnderTransformGroup("Enemies");
-        Container.Bind<Gold>().AsSingle();
-        Container.Bind<KilledEnemyCounter>().AsSingle();
-    }
+        [SerializeField] private MovementAlongPath enemyPrefab;
+
+        public override void InstallBindings()
+        {
+            Container.BindFactory<Enemy, Enemy.Factory>()
+                .FromComponentInNewPrefab(enemyPrefab)
+                .UnderTransformGroup("Enemies");
+            Container.Bind<Gold>().AsSingle();
+            Container.Bind<KilledEnemyCounter>().AsSingle();
+        }
+    } 
 }

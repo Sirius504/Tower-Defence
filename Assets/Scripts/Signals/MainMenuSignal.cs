@@ -1,4 +1,4 @@
-﻿namespace Signals
+﻿namespace TowerDefence.Signals
 {
     public class ExitSignal
     {

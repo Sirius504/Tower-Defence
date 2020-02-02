@@ -2,46 +2,49 @@
 using UnityEngine;
 using Zenject;
 
-public class MovementAlongPath : MonoBehaviour
+namespace TowerDefence.Gameplay.Movement
 {
-    private TargetMovement movement;
-    private Waypoints waypoints;
-    private int currentWaypointIndex = 0;
-
-    public event Action OnPathTraversed;
-
-    [Inject]
-    public void Construct(TargetMovement movement, Waypoints waypoints)
+    public class MovementAlongPath : MonoBehaviour
     {
-        this.movement = movement;
-        this.waypoints = waypoints;
-    }
+        private TargetMovement movement;
+        private Waypoints waypoints;
+        private int currentWaypointIndex = 0;
 
-    private void Start()
-    {
-        if (waypoints.WaypointsList.Count > 0)
+        public event Action OnPathTraversed;
+
+        [Inject]
+        public void Construct(TargetMovement movement, Waypoints waypoints)
         {
-            movement.OnArrived += OnWaypointArrived;
+            this.movement = movement;
+            this.waypoints = waypoints;
+        }
+
+        private void Start()
+        {
+            if (waypoints.WaypointsList.Count > 0)
+            {
+                movement.OnArrived += OnWaypointArrived;
+                movement.TargetTransform = waypoints.WaypointsList[currentWaypointIndex];
+            }
+        }
+
+        private void OnWaypointArrived()
+        {
+            if (currentWaypointIndex == waypoints.WaypointsList.Count - 1)
+                OnPathTraversed?.Invoke();
+            currentWaypointIndex = Mathf.Clamp(++currentWaypointIndex, 0, waypoints.WaypointsList.Count - 1);
             movement.TargetTransform = waypoints.WaypointsList[currentWaypointIndex];
         }
-    }
 
-    private void OnWaypointArrived()
-    {
-        if (currentWaypointIndex == waypoints.WaypointsList.Count - 1)
-            OnPathTraversed?.Invoke();
-        currentWaypointIndex = Mathf.Clamp(++currentWaypointIndex, 0, waypoints.WaypointsList.Count - 1);
-        movement.TargetTransform = waypoints.WaypointsList[currentWaypointIndex];
-    }
+        public Vector3 GetSpeed()
+        {
+            return movement.GetSpeed();
+        }
 
-    public Vector3 GetSpeed()
-    {
-        return movement.GetSpeed();
-    }
+        private void OnDestroy()
+        {
+            movement.OnArrived -= OnWaypointArrived;
+        }
 
-    private void OnDestroy()
-    {
-        movement.OnArrived -= OnWaypointArrived;
-    }
-
+    } 
 }

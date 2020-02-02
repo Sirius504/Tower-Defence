@@ -1,52 +1,56 @@
 ﻿using System;
+using TowerDefence.Gameplay.HealthSystem;
 using UnityEngine;
 using Zenject;
 
-public class Damager
+namespace TowerDefence.Gameplay.Damage
 {
-    public Parameters parameters;
-
-    [Inject]
-    public void Construct(Parameters parameters)
+    public class Damager
     {
-        SetParameters(parameters);
-    }
+        public Parameters parameters;
 
-    public void SetParameters(Parameters parameters)
-    {
-        parameters.Validate();
-        this.parameters = parameters;
-    }
-
-    public void DoDamage(Health health)
-    {
-        if (health == null)
-            throw new NullReferenceException("Damaging null target");
-        health.Change(-parameters.Damage);
-    }
-
-    [Serializable]
-    public class Parameters : ICloneable
-    {
-        [Min(0)]
-        [SerializeField] private int damage = 1;
-        public int Damage => damage;
-
-        public Parameters(int damage)
+        [Inject]
+        public void Construct(Parameters parameters)
         {
-            this.damage = damage;
+            SetParameters(parameters);
         }
 
-        public object Clone()
+        public void SetParameters(Parameters parameters)
         {
-            return new Parameters(damage);
+            parameters.Validate();
+            this.parameters = parameters;
         }
 
-        public void Validate()
+        public void DoDamage(Health health)
         {
-            if (damage < 0)
-                throw new ArgumentOutOfRangeException("damage", "Damage is less than zero");
+            if (health == null)
+                throw new NullReferenceException("Damaging null target");
+            health.Change(-parameters.Damage);
         }
-    }
+
+        [Serializable]
+        public class Parameters : ICloneable
+        {
+            [Min(0)]
+            [SerializeField] private int damage = 1;
+            public int Damage => damage;
+
+            public Parameters(int damage)
+            {
+                this.damage = damage;
+            }
+
+            public object Clone()
+            {
+                return new Parameters(damage);
+            }
+
+            public void Validate()
+            {
+                if (damage < 0)
+                    throw new ArgumentOutOfRangeException("damage", "Damage is less than zero");
+            }
+        }
+    } 
 }
 

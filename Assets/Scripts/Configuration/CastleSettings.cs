@@ -1,13 +1,17 @@
-﻿using UnityEngine;
+﻿using TowerDefence.Gameplay.CastleSystem;
+using UnityEngine;
 using Zenject;
 
-[CreateAssetMenu(fileName ="Castle", menuName = "Presets/Castle")]
-public class CastleSettings : ScriptableObjectInstaller
+namespace TowerDefence.Configuration
 {
-    public Castle.Settings castleSettings;
-
-    public override void InstallBindings()
+    [CreateAssetMenu(fileName = "Castle", menuName = "Presets/Castle")]
+    public class CastleSettings : ScriptableObjectInstaller
     {
-        Container.BindInstance(castleSettings.healthSettings);
+        public Castle.Settings castleSettings;
+
+        public override void InstallBindings()
+        {
+            Container.BindInstance(castleSettings.healthSettings);
+        }
     }
 }

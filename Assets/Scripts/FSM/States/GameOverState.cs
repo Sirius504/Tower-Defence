@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace FiniteStateMachine.States
+namespace TowerDefence.FiniteStateMachine.States
 {
     public class GameOverState : StateBase
     {

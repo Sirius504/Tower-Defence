@@ -1,27 +1,31 @@
 ﻿using TMPro;
+using TowerDefence.Gameplay;
 using UnityEngine;
 using Zenject;
 
-public class EnemyCounter : MonoBehaviour
+namespace TowerDefence.UI
 {
-    private TextMeshProUGUI textMesh;
-    private KilledEnemyCounter counter;
-
-    [Inject]
-    public void Construct(TextMeshProUGUI textMesh, KilledEnemyCounter counter)
+    public class EnemyCounter : MonoBehaviour
     {
-        this.textMesh = textMesh;
-        this.counter = counter;
-    }
+        private TextMeshProUGUI textMesh;
+        private KilledEnemyCounter counter;
 
-    private void Start()
-    {
-        UpdateCounter(counter.Killed);
-        counter.OnChange += UpdateCounter;
-    }
+        [Inject]
+        public void Construct(TextMeshProUGUI textMesh, KilledEnemyCounter counter)
+        {
+            this.textMesh = textMesh;
+            this.counter = counter;
+        }
 
-    private void UpdateCounter(int value)
-    {
-        textMesh.text = $"Killed: {value}";
-    }
+        private void Start()
+        {
+            UpdateCounter(counter.Killed);
+            counter.OnChange += UpdateCounter;
+        }
+
+        private void UpdateCounter(int value)
+        {
+            textMesh.text = $"Killed: {value}";
+        }
+    } 
 }

@@ -1,12 +1,15 @@
-﻿public class MainMenuInterface : InterfaceBase
+﻿namespace TowerDefence.UI
 {
-    public override void Open()
+    public class MainMenuInterface : InterfaceBase
     {
-        gameObject.SetActive(true);
-    }
-    
-    public override void Close()
-    {
-        gameObject.SetActive(false);
-    }
+        public override void Open()
+        {
+            gameObject.SetActive(true);
+        }
+
+        public override void Close()
+        {
+            gameObject.SetActive(false);
+        }
+    } 
 }

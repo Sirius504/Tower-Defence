@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class HealthInstaller : MonoInstaller
+namespace TowerDefence.Gameplay.HealthSystem
 {
-    public override void InstallBindings()
+    public class HealthInstaller : MonoInstaller
     {
-        Container.Bind<Health>().AsTransient();
-    }
+        public override void InstallBindings()
+        {
+            Container.Bind<Health>().AsTransient();
+        }
+    } 
 }

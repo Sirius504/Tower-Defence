@@ -1,54 +1,58 @@
 ﻿using System;
 using System.Linq;
+using TowerDefence.Gameplay.EnemySystem;
 using UnityEngine;
 using Zenject;
 
-public class TowerTargeter : Targeter<Enemy>
+namespace TowerDefence.Gameplay.TowerSystem
 {
-    private Parameters settings;
-    private float lastShotTime;
-
-    [Inject]
-    public void Construct(Parameters settings)
+    public class TowerTargeter : Targeter<Enemy>
     {
-        this.settings = settings;
-    }
+        private Parameters settings;
+        private float lastShotTime;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Time.time > lastShotTime + settings.fireRate)
+        [Inject]
+        public void Construct(Parameters settings)
         {
-            CurrentTarget = GetClosestEnemyInRadius();
-            if (CurrentTarget == null)
-                return;
-            InvokeOnTargetAcquired(CurrentTarget);
-            lastShotTime = Time.time;
+            this.settings = settings;
         }
-    }
 
-    private Enemy GetClosestEnemyInRadius()
-    {
-        var collidersInRadius = Physics.OverlapSphere(transform.position, settings.radius)
-            // Sometimes physics engine detects collision with freshly spawned object
-            // while it's at (0, 0, 0), checking again here that collider 
-            // within radius.
-            .Where(c => (c.transform.position - transform.position).sqrMagnitude < Mathf.Pow(settings.radius, 2))
-            .OrderBy(c => (c.transform.position - transform.position).sqrMagnitude);
-
-        foreach (var collider in collidersInRadius)
+        // Update is called once per frame
+        void Update()
         {
-            var enemyComponent = collider.GetComponent<Enemy>();
-            if (enemyComponent != null)
-                return enemyComponent;
+            if (Time.time > lastShotTime + settings.fireRate)
+            {
+                CurrentTarget = GetClosestEnemyInRadius();
+                if (CurrentTarget == null)
+                    return;
+                InvokeOnTargetAcquired(CurrentTarget);
+                lastShotTime = Time.time;
+            }
         }
-        return null;
-    }
 
-    [Serializable]
-    public class Parameters
-    {
-        public float radius = 10f;
-        public float fireRate = 1f;
-    }
+        private Enemy GetClosestEnemyInRadius()
+        {
+            var collidersInRadius = Physics.OverlapSphere(transform.position, settings.radius)
+                // Sometimes physics engine detects collision with freshly spawned object
+                // while it's at (0, 0, 0), checking again here that collider 
+                // within radius.
+                .Where(c => (c.transform.position - transform.position).sqrMagnitude < Mathf.Pow(settings.radius, 2))
+                .OrderBy(c => (c.transform.position - transform.position).sqrMagnitude);
+
+            foreach (var collider in collidersInRadius)
+            {
+                var enemyComponent = collider.GetComponent<Enemy>();
+                if (enemyComponent != null)
+                    return enemyComponent;
+            }
+            return null;
+        }
+
+        [Serializable]
+        public class Parameters
+        {
+            public float radius = 10f;
+            public float fireRate = 1f;
+        }
+    } 
 }

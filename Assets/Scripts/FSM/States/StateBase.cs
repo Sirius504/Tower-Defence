@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FiniteStateMachine.States
+namespace TowerDefence.FiniteStateMachine.States
 {
     public abstract class StateBase
     {        

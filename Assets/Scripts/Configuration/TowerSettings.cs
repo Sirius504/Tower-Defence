@@ -1,14 +1,18 @@
-﻿using UnityEngine;
+﻿using TowerDefence.Gameplay.TowerSystem;
+using UnityEngine;
 using Zenject;
 
-[CreateAssetMenu(fileName ="Tower", menuName ="Presets/Tower")]
-public class TowerSettings : ScriptableObjectInstaller
+namespace TowerDefence.Configuration
 {
-    [SerializeField] private Tower.Parameters towerSettings;
-    public override void InstallBindings()
+    [CreateAssetMenu(fileName = "Tower", menuName = "Presets/Tower")]
+    public class TowerSettings : ScriptableObjectInstaller
     {
-        Container.BindInstance(towerSettings);
-        Container.BindInstance(towerSettings.TargeterParameters);
-        Container.BindInstance(towerSettings.DamagerParameters);
+        [SerializeField] private Tower.Parameters towerSettings;
+        public override void InstallBindings()
+        {
+            Container.BindInstance(towerSettings);
+            Container.BindInstance(towerSettings.TargeterParameters);
+            Container.BindInstance(towerSettings.DamagerParameters);
+        }
     }
 }

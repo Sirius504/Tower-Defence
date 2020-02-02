@@ -1,12 +1,18 @@
-﻿using Zenject;
+﻿using TowerDefence.Gameplay.Damage;
+using TowerDefence.Gameplay.HealthSystem;
+using TowerDefence.Gameplay.LootSystem;
+using Zenject;
 
-public class EnemyInstaller : MonoInstaller
+namespace TowerDefence.Gameplay.EnemySystem
 {
-    public override void InstallBindings()
+    public class EnemyInstaller : MonoInstaller
     {
-        Container.Bind<Health>().FromNew().AsSingle().NonLazy();
-        Container.Bind<Damager>().FromNew().AsSingle();
-        Container.Bind<Targeter<Health>>().FromComponentInChildren();
-        Container.Bind<Loot>().FromNew().AsSingle();
-    }
+        public override void InstallBindings()
+        {
+            Container.Bind<Health>().FromNew().AsSingle().NonLazy();
+            Container.Bind<Damager>().FromNew().AsSingle();
+            Container.Bind<Targeter<Health>>().FromComponentInChildren();
+            Container.Bind<Loot>().FromNew().AsSingle();
+        }
+    } 
 }

@@ -1,49 +1,52 @@
 ﻿using System;
 using UnityEngine;
 
-public class Loot
+namespace TowerDefence.Gameplay.LootSystem
 {
-    private Parameters parameters;
-    private readonly Gold playerGold;
-
-    public Loot(Parameters parameters, Gold playerGold)
-    {        
-        this.playerGold = playerGold;
-        SetParameters(parameters);
-    }
-
-    public void SetParameters(Parameters parameters)
+    public class Loot
     {
-        parameters.Validate();
-        this.parameters = parameters;
-    }
+        private Parameters parameters;
+        private readonly Gold playerGold;
 
-    public void ApplyLoot()
-    {
-        playerGold.Add(parameters.Amount);
-    }
-
-    [Serializable]
-    public class Parameters : ICloneable
-    {
-        [Min(0)]
-        [SerializeField] private int amount;
-        public int Amount => amount;
-
-        public Parameters(int amount)
+        public Loot(Parameters parameters, Gold playerGold)
         {
-            this.amount = amount;
+            this.playerGold = playerGold;
+            SetParameters(parameters);
         }
 
-        public object Clone()
+        public void SetParameters(Parameters parameters)
         {
-            return new Parameters(amount);
+            parameters.Validate();
+            this.parameters = parameters;
         }
 
-        public void Validate()
+        public void ApplyLoot()
         {
-            if (amount < 0)
-                throw new ArgumentOutOfRangeException("amount", "Loot amount is less than zero.");
+            playerGold.Add(parameters.Amount);
         }
-    }
+
+        [Serializable]
+        public class Parameters : ICloneable
+        {
+            [Min(0)]
+            [SerializeField] private int amount;
+            public int Amount => amount;
+
+            public Parameters(int amount)
+            {
+                this.amount = amount;
+            }
+
+            public object Clone()
+            {
+                return new Parameters(amount);
+            }
+
+            public void Validate()
+            {
+                if (amount < 0)
+                    throw new ArgumentOutOfRangeException("amount", "Loot amount is less than zero.");
+            }
+        }
+    } 
 }

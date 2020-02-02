@@ -1,28 +1,32 @@
-﻿using System;
-using UnityEngine;
+﻿using TowerDefence.Gameplay.CastleSystem;
+using TowerDefence.Gameplay.HealthSystem;
+using TowerDefence.Gameplay.Movement;
 using Zenject;
 
-public class EnemyTargeter : Targeter<Health>
+namespace TowerDefence.Gameplay.EnemySystem
 {
-    private MovementAlongPath pathMovement;
-    private Castle castle;
-
-    [Inject]
-    public void Construct(MovementAlongPath pathMovement, Castle castle)
+    public class EnemyTargeter : Targeter<Health>
     {
-        this.pathMovement = pathMovement;
-        this.castle = castle;
-    }
+        private MovementAlongPath pathMovement;
+        private Castle castle;
 
-    public void Start()
-    {
-        pathMovement.OnPathTraversed += OnCastleReached;
-        CurrentTarget = null;
-    }
+        [Inject]
+        public void Construct(MovementAlongPath pathMovement, Castle castle)
+        {
+            this.pathMovement = pathMovement;
+            this.castle = castle;
+        }
 
-    private void OnCastleReached()
-    {
-        CurrentTarget = castle.Health;
-        InvokeOnTargetAcquired(CurrentTarget);
+        public void Start()
+        {
+            pathMovement.OnPathTraversed += OnCastleReached;
+            CurrentTarget = null;
+        }
+
+        private void OnCastleReached()
+        {
+            CurrentTarget = castle.Health;
+            InvokeOnTargetAcquired(CurrentTarget);
+        }
     }
 }

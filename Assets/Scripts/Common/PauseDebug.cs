@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseDebug : MonoBehaviour
+namespace TowerDefence.Common
 {
-    public void Pause()
+    public class PauseDebug : MonoBehaviour
     {
-        Debug.Break();
-    }
+        public void Pause()
+        {
+            Debug.Break();
+        }
+    } 
 }

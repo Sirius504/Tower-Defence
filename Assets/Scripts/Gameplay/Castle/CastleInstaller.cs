@@ -1,9 +1,13 @@
+using TowerDefence.Gameplay.HealthSystem;
 using Zenject;
 
-public class CastleInstaller : MonoInstaller
+namespace TowerDefence.Gameplay.CastleSystem
 {
-    public override void InstallBindings()
+    public class CastleInstaller : MonoInstaller
     {
-        Container.Bind<Health>().FromNew().AsSingle();
+        public override void InstallBindings()
+        {
+            Container.Bind<Health>().FromNew().AsSingle();
+        }
     }
 }

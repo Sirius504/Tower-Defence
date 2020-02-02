@@ -1,14 +1,18 @@
-﻿using UnityEngine;
+﻿using TowerDefence.Gameplay;
+using UnityEngine;
 using Zenject;
 
-[CreateAssetMenu(fileName = "WavesSettings", menuName = "Presets/Wave")]
-public class WavesSettings : ScriptableObjectInstaller
+namespace TowerDefence.Configuration
 {
-    [SerializeField] private WavesController.Parameters levelParameters;
-
-    public override void InstallBindings()
+    [CreateAssetMenu(fileName = "WavesSettings", menuName = "Presets/Wave")]
+    public class WavesSettings : ScriptableObjectInstaller
     {
-        Container.BindInstance(levelParameters);
-    }
+        [SerializeField] private WavesController.Parameters levelParameters;
+
+        public override void InstallBindings()
+        {
+            Container.BindInstance(levelParameters);
+        }
+    } 
 }
 

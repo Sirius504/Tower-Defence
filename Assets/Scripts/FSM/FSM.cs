@@ -1,9 +1,10 @@
-﻿using FiniteStateMachine.States;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TowerDefence.Common;
+using TowerDefence.FiniteStateMachine.States;
 
-namespace FiniteStateMachine
+namespace TowerDefence.FiniteStateMachine
 {
     public class FSM
     {
@@ -27,8 +28,8 @@ namespace FiniteStateMachine
 
             if (!CurrentState.Transitions.Contains(transition))
                 throw new InvalidOperationException($"Transition \"{transition}\" not found in CurrentState: \"{CurrentState}\"");
-            
-            CoroutineSingleton.StartCoroutine(CurrentState.ExitTransitionRoutine(transition, OnStateExit));            
+
+            CoroutineSingleton.StartCoroutine(CurrentState.ExitTransitionRoutine(transition, OnStateExit));
         }
 
         private void OnStateExit(Transition transition)

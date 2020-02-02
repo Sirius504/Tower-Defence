@@ -1,6 +1,6 @@
-﻿using FiniteStateMachine.States;
+﻿using TowerDefence.FiniteStateMachine.States;
 
-namespace FiniteStateMachine
+namespace TowerDefence.FiniteStateMachine
 {
     public class Transition
     {

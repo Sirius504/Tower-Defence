@@ -1,19 +1,22 @@
-﻿using Signals;
+﻿using TowerDefence.Signals;
 using UnityEngine;
 using Zenject;
 
-public class SendMainMenuSignal : MonoBehaviour
+namespace TowerDefence.UI.SignalSenders
 {
-    private SignalBus signalBus;
-
-    [Inject]
-    public void Construct(SignalBus signalBus)
+    public class SendMainMenuSignal : MonoBehaviour
     {
-        this.signalBus = signalBus;
-    }
+        private SignalBus signalBus;
 
-    public void SendSignal()
-    {
-        signalBus.Fire(new ExitSignal());
+        [Inject]
+        public void Construct(SignalBus signalBus)
+        {
+            this.signalBus = signalBus;
+        }
+
+        public void SendSignal()
+        {
+            signalBus.Fire(new ExitSignal());
+        }
     }
 }
