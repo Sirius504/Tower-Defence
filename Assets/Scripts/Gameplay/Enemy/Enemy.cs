@@ -16,15 +16,22 @@ namespace TowerDefence.Gameplay.EnemySystem
         private MovementAlongPath movement;
         private Damager damager;
         private Loot loot;
+        private Counter killedEnemyCounter;
 
         [Inject]
-        public void Construct(Health health, Targeter<Health> targeter, MovementAlongPath movement, Damager damager, Loot loot)
+        public void Construct(Health health,
+            Targeter<Health> targeter,
+            MovementAlongPath movement,
+            Damager damager,
+            Loot loot,
+            Counter killedEnemyCounter)
         {
             this.targeter = targeter;
             this.Health = health;
             this.movement = movement;
             this.damager = damager;
             this.loot = loot;
+            this.killedEnemyCounter = killedEnemyCounter;
         }
 
         private void Start()
@@ -50,6 +57,7 @@ namespace TowerDefence.Gameplay.EnemySystem
         {
             Health.OnHealthZero -= OnDeath;
             loot.ApplyLoot();
+            killedEnemyCounter.Change(1);
             Destroy(gameObject);
         }
 

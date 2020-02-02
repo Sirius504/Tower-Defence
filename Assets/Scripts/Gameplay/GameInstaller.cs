@@ -16,7 +16,7 @@ namespace TowerDefence.Gameplay
                 .FromComponentInNewPrefab(enemyPrefab)
                 .UnderTransformGroup("Enemies");
             Container.Bind<Gold>().AsSingle();
-            Container.Bind<KilledEnemyCounter>().AsSingle();
+            Container.Bind<Counter>().To<KilledEnemiesCounter>().AsSingle();
         }
     } 
 }

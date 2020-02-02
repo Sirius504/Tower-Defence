@@ -91,7 +91,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 48
+  m_fontSize: 65.55
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -767,7 +767,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 45.3
+  m_fontSize: 61.85
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -882,7 +882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 3
-  m_AspectRatio: 2.2073572
+  m_AspectRatio: 2.8
 --- !u!1 &7589978595152884948
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,10 +916,10 @@ RectTransform:
   m_Father: {fileID: 4896189524218490575}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.049615648, y: 0.30882275}
-  m_AnchorMax: {x: 0.9480001, y: 0.91075915}
-  m_AnchoredPosition: {x: 1, y: 1.9749756}
-  m_SizeDelta: {x: -3.699997, y: -1.699997}
+  m_AnchorMin: {x: 0.049615648, y: 0.42985827}
+  m_AnchorMax: {x: 0.9480001, y: 0.799}
+  m_AnchoredPosition: {x: 1, y: -0.5250244}
+  m_SizeDelta: {x: -3.7, y: -2.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3425342586468271094
 CanvasRenderer:
@@ -975,12 +975,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 105.1
+  m_fontSize: 113.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 355.91
+  m_fontSizeMax: 348.44
   m_fontStyle: 17
   m_textAlignment: 514
   m_characterSpacing: 0
@@ -1021,7 +1021,7 @@ MonoBehaviour:
     spaceCount: 1
     wordCount: 2
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -1194,6 +1194,7 @@ GameObject:
   - component: {fileID: 5441628298928208458}
   - component: {fileID: 3684613444885631182}
   - component: {fileID: 8577951106559887784}
+  - component: {fileID: 5816338291270695316}
   - component: {fileID: 8866857084557284510}
   m_Layer: 5
   m_Name: EnemyCounter
@@ -1217,10 +1218,10 @@ RectTransform:
   m_Father: {fileID: 4896189524218490575}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.049615648, y: 0.06753181}
-  m_AnchorMax: {x: 0.9480001, y: 0.30882275}
-  m_AnchoredPosition: {x: 0, y: -0.000030517578}
-  m_SizeDelta: {x: 0, y: 0.000022888184}
+  m_AnchorMin: {x: 0.049615648, y: 0.10420578}
+  m_AnchorMax: {x: 0.9480001, y: 0.27216312}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3842746503361523281
 MonoBehaviour:
@@ -1235,7 +1236,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 5816338291270695316}
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
@@ -1311,7 +1313,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 86.1
+  m_fontSize: 81.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1375,6 +1377,19 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5816338291270695316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8550049252639980561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4af6c6340cffb409dc15804618276c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: Killed
 --- !u!114 &8866857084557284510
 MonoBehaviour:
   m_ObjectHideFlags: 0
