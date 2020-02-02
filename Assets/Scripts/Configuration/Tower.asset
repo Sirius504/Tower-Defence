@@ -17,4 +17,4 @@ MonoBehaviour:
       radius: 15
       fireRate: 1
     damagerParameters:
-      damage: 1
+      damage: 5

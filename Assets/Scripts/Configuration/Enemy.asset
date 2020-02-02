@@ -19,6 +19,6 @@ MonoBehaviour:
     healthParameters:
       maxValue: 10
     damagerParameters:
-      damage: 13
+      damage: 1
     lootParameters:
-      amount: 30
+      amount: 10
