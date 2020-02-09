@@ -31,6 +31,7 @@ namespace TowerDefence.Gameplay.TowerSystem
             ResetLineRenderer();
             float startTime = Time.time;
             Vector3 toTarget = InverseScale(targetPosition - transform.position, transform.lossyScale);
+
             float t = 0f;
             while (t <= 1f)
             {
@@ -58,7 +59,7 @@ namespace TowerDefence.Gameplay.TowerSystem
             lineRenderer.enabled = true;
             lineRenderer.startColor = SetAlpha(lineRenderer.startColor, 1f);
             lineRenderer.endColor = SetAlpha(lineRenderer.endColor, 1f);
-            lineRenderer.SetPosition(1, Vector3.zero);
+            lineRenderer.SetPosition(1, Vector3.zero);            
         }
 
         private Vector3 InverseScale(Vector3 vector, Vector3 scale)
